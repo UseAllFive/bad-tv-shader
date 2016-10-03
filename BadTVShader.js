@@ -44,6 +44,7 @@ THREE.BadTVShader = {
 		"distortion2":  { type: "f", value: 5.0 },
 		"speed":     	{ type: "f", value: 0.2 },
 		"rollSpeed":    { type: "f", value: 0.1 },
+		"mouseX":       { type: "f", value: 0.1 }
 	},
 
 	vertexShader: [
@@ -63,6 +64,7 @@ THREE.BadTVShader = {
 		"uniform float distortion2;",
 		"uniform float speed;",
 		"uniform float rollSpeed;",
+		"uniform float mouseX;",
 		"varying vec2 vUv;",
 		
 		// Start Ashima 2D Simplex Noise
@@ -122,7 +124,7 @@ THREE.BadTVShader = {
 			"float ty = time*speed;",
 			"float yt = p.y - ty;",
 			//smooth distortion
-			"float offset = snoise(vec2(yt*3.0,0.0))*0.2;",
+			"float offset = snoise(vec2(yt*3.0,0.0))*0.2 +  mouseX;",
 			// boost distortion
 			"offset = offset*distortion * offset*distortion * offset;",
 			//add fine grain distortion
